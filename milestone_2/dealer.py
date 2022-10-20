@@ -1,0 +1,2 @@
+class dealer:
+    pass

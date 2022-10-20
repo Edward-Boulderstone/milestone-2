@@ -1,9 +1,12 @@
-name: Python Package using Conda
+name: Run pytest
 
-on: [push]
+on:
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  build-linux:
+  Run-pytest:
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 5

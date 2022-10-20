@@ -20,4 +20,4 @@ repos:
     hooks:
     -   id: pylint
         args:
-        -   --fail-under=10
+        -   --fail-under=0

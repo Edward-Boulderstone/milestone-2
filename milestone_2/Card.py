@@ -19,6 +19,6 @@ face_values = (
 class Card:
     def __init__(self, suit: str, value: int):
         assert suit in suits
-        assert value in range(14)
+        assert value in range(len(face_values))
         self.suit = suit
         self.face_value = face_values[value - 1]

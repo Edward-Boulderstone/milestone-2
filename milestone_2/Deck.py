@@ -16,5 +16,5 @@ face_values = (
 )
 
 
-class deck:
+class Deck:
     pass

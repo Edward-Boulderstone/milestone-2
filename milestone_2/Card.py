@@ -7,7 +7,7 @@ class Card:
     A Card object represents a playing card from a 52 card tarot deck
     """
 
-    def __init__(self, suit: str, value: int):
+    def __init__(self, suit: str, value: int) -> None:
         assert suit in suits
         assert value in range(len(face_values))
         self.suit = suit

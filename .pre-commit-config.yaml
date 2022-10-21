@@ -26,3 +26,4 @@ repos:
     hooks:
     -   id: mypy
         args: [--pretty, --strict]
+        additional_dependencies: [pytest==7.1.3]

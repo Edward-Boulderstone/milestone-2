@@ -1,11 +1,26 @@
-from milestone_2 import __version__, love
+"""
+
+    You need to create a simple text-based BlackJack game
+    The game needs to have one player versus an automated dealer.
+    The player can stand or hit.
+    The player must be able to pick their betting amount.
+    You need to keep track of the player's total money.
+    You need to alert the player of wins, losses, or busts, etc...
+
+"""
 
 
-def test_version():
-    assert __version__ == "0.1.0"
+def test_stand_and_hit() -> None:
+    assert False
 
 
-def test_love():
-    assert love(2) == 4
-    assert love(4) == 8
-    assert love(float("inf")) == float("inf")
+def test_can_bet_various() -> None:
+    assert False
+
+
+def test_tracks_players_money() -> None:
+    assert False
+
+
+def test_feedback_on_win_or_loss() -> None:
+    assert False

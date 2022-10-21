@@ -22,3 +22,7 @@ def test_deck_removes_card_when_drawn() -> None:
         current_deck_size -= 1
         assert len(deck) == current_deck_size
     assert len(set(cards_in_deck)) == 52
+
+
+def test_deck_throws_assertion_error_when_no_cards() -> None:
+    assert False

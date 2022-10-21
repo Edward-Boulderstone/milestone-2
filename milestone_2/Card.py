@@ -1,24 +1,14 @@
-suits = ("Spade", "Club", "Heart", "Diamond")
-face_values = (
-    "Ace",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "Jack",
-    "Queen",
-    "King",
-)
+from Card_Values import suits
+from Card_Values import face_values
 
 
 class Card:
-    def __init__(self, suit: str, value: int):
+    """
+    A Card object represents a playing card from a 52 card tarot deck
+    """
+
+    def __init__(self, suit: str, value: int) -> None:
         assert suit in suits
-        assert value in range(14)
+        assert value in range(len(face_values))
         self.suit = suit
         self.face_value = face_values[value - 1]

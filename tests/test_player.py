@@ -21,20 +21,28 @@ def bust_player(player_with_starting_hand: Player) -> Player:
     return player_with_starting_hand
 
 
-def test_is_bust() -> None:
-    assert False
+def test_is_bust(player_with_starting_hand: Player, bust_player: Player) -> None:
+    assert not player_with_starting_hand.is_bust()
+    assert bust_player.is_bust()
 
 
-def test_can_hit() -> None:
-    assert False
+def test_can_hit(player_with_starting_hand: Player) -> None:
+    inital_cards_in_hand = len(player_with_starting_hand.hand)
+    player_with_starting_hand.hit()
+    assert inital_cards_in_hand == 1 + len(player_with_starting_hand.hand)
 
 
-def test_can_stand() -> None:
-    assert False
+def test_can_stand(player_with_starting_hand: Player) -> None:
+    inital_cards_in_hand = len(player_with_starting_hand.hand)
+    player_with_starting_hand.stand()
+    player_with_starting_hand.hit()
+    assert inital_cards_in_hand == len(player_with_starting_hand.hand)
 
 
-def test_cant_make_actions_when_bust() -> None:
-    assert False
+def test_cant_make_actions_when_bust(bust_player: Player) -> None:
+    inital_cards_in_hand = len(bust_player.hand)
+    bust_player.hit()
+    assert inital_cards_in_hand == len(bust_player.hand)
 
 
 def test_cant_bet_more_chips_than_own() -> None:

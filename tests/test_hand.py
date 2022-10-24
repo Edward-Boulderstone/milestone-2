@@ -1,13 +1,15 @@
 import pytest
 
+from milestone_2.Card import Card
 from milestone_2.Hand import Hand
 
 
-class TestCard:
+class TestCard(Card):
     def __init__(self, value: int) -> None:
+        super().__init__("Heart", value)
         self.value = value
 
-    def get_card_value(self) -> int:
+    def get_value(self) -> int:
         return self.value
 
 
@@ -28,7 +30,7 @@ def six() -> TestCard:
 
 @pytest.fixture
 def seven() -> TestCard:
-    return TestCard(6)
+    return TestCard(7)
 
 
 @pytest.fixture
@@ -99,14 +101,14 @@ def test_comparison_of_equal_valued_hands() -> None:
 
     hand_15_rhs = test_hand(5, 10)
     hand_5_rhs = test_hand(4, 1)
-    hand_21_rhs = test_hand(9, 7, 4)
+    hand_21_rhs = test_hand(9, 7, 5)
 
     assert hand_15_lhs == hand_15_rhs
     assert hand_5_lhs == hand_5_rhs
     assert hand_21_lhs == hand_21_rhs
 
 
-def test_comparison_of_black_and_21(blackjack_hand: Hand) -> None:
+def test_comparison_of_blackjack_and_21(blackjack_hand: Hand) -> None:
     hand_21 = test_hand(4, 7, 10)
 
     assert blackjack_hand > hand_21
@@ -144,4 +146,4 @@ def test_ace_in_hand_compare() -> None:
     for ace_hand in ace_hands:
         assert ace_hand > hand_16
         assert ace_hand == hand_17
-        assert ace_hand > hand_18
+        assert ace_hand < hand_18

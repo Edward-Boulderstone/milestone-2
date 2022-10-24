@@ -27,38 +27,58 @@ def six() -> TestCard:
 
 
 @pytest.fixture
-def ace_test_hand(ace: TestCard, ten: TestCard) -> Hand:
+def seven() -> TestCard:
+    return TestCard(6)
+
+
+@pytest.fixture
+def blackjack_hand(ace: TestCard, ten: TestCard) -> Hand:
     return Hand(ace, ten)
 
 
 @pytest.fixture
-def sixteen_test_hand(six: TestCard, ten: TestCard) -> Hand:
+def ace_hand(ace: TestCard, six: TestCard) -> Hand:
+    return Hand(ace, six)
+
+
+@pytest.fixture
+def sixteen_hand(six: TestCard, ten: TestCard) -> Hand:
     return Hand(six, ten)
 
 
+@pytest.fixture
+def seventeen_hand(seven: TestCard, ten: TestCard) -> Hand:
+    return Hand(seven, ten)
+
+
 def test_hand(*card_values: int) -> Hand:
-    TestCards = [TestCard(card_value) for card_value in card_values]
-    return Hand(*TestCards)
+    test_cards = [TestCard(card_value) for card_value in card_values]
+    return Hand(*test_cards)
 
 
-def test_starting_hand_value(ace_hand: Hand, sixteen_hand: Hand) -> None:
-    assert ace_hand.value() == 21
+def test_ace_can_be_high_in_hand_value(blackjack_hand: Hand, ace_hand: Hand) -> None:
+    assert blackjack_hand.value() == 21
+    assert ace_hand.value() == 17
+
+
+def test_standard_hand_value(sixteen_hand: Hand, seventeen_hand: Hand) -> None:
     assert sixteen_hand.value() == 16
+    assert seventeen_hand.value() == 17
 
 
 def test_drawing_card_updates_value(
-    ace_hand: Hand, sixteen_hand: Hand, ten: TestCard, six: TestCard
+    blackjack_hand: Hand, sixteen_hand: Hand, ten: TestCard, six: TestCard
 ) -> None:
-    assert ace_hand.draw(ten).value() == 21
+    assert blackjack_hand.draw(ten).value() == 21
     assert sixteen_hand.draw(six).value() == 22
 
 
 def test_is_bust(
-    ace_hand: Hand, sixteen_hand: Hand, ten: TestCard, six: TestCard
+    blackjack_hand: Hand, sixteen_hand: Hand, ten: TestCard, six: TestCard
 ) -> None:
-    assert not ace_hand.is_bust()
+    assert not blackjack_hand.is_bust()
     assert not sixteen_hand.is_bust()
-    assert not ace_hand.draw(ten).is_bust()
+    assert not blackjack_hand.draw(ten).is_bust()
     assert sixteen_hand.draw(six).is_bust()
 
 
@@ -86,8 +106,7 @@ def test_comparison_of_equal_valued_hands() -> None:
     assert hand_21_lhs == hand_21_rhs
 
 
-def test_comparison_of_black_and_21(ace_hand: Hand) -> None:
-    blackjack_hand = test_hand(10, 11)
+def test_comparison_of_black_and_21(blackjack_hand: Hand) -> None:
     hand_21 = test_hand(4, 7, 10)
 
     assert blackjack_hand > hand_21

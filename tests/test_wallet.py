@@ -8,6 +8,7 @@ def new_wallet() -> Wallet:
     return Wallet()
 
 
+@pytest.fixture
 def empty_wallet() -> Wallet:
     return Wallet(0)
 

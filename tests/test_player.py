@@ -39,16 +39,16 @@ def test_is_bust(player_with_starting_hand: Player, bust_player: Player) -> None
 
 
 def test_can_hit(player_with_starting_hand: Player) -> None:
-    inital_cards_in_hand = len(player_with_starting_hand.hand)
+    initial_cards_in_hand = len(player_with_starting_hand.hand)
     player_with_starting_hand.hit()
-    assert inital_cards_in_hand == 1 + len(player_with_starting_hand.hand)
+    assert initial_cards_in_hand == 1 + len(player_with_starting_hand.hand)
 
 
 def test_can_stand(player_with_starting_hand: Player) -> None:
-    inital_cards_in_hand = len(player_with_starting_hand.hand)
+    initial_cards_in_hand = len(player_with_starting_hand.hand)
     player_with_starting_hand.stand()
     player_with_starting_hand.hit()
-    assert inital_cards_in_hand == len(player_with_starting_hand.hand)
+    assert initial_cards_in_hand == len(player_with_starting_hand.hand)
 
 
 def test_cant_make_actions_when_bust(bust_player: Player) -> None:

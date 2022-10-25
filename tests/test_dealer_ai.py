@@ -1,7 +1,5 @@
 from unittest.mock import patch, MagicMock
-
 from _pytest.fixtures import fixture
-
 from milestone_2.Dealer_AI import Dealer_AI
 from milestone_2.Hand import Hand
 
@@ -113,29 +111,31 @@ def test_cannot_perform_actions_when_hand_to_beat_is_not_set(
     assert dealer_ai.can_perform_actions()
 
 
-@patch("Dealer_ai.need_to_hit", lambda *args: True)
+@patch("milestone_2.Dealer_AI.Dealer_AI.need_to_hit", lambda *args: True)
+@patch("milestone_2.Dealer_AI.Dealer_AI.can_perform_actions", lambda *args: True)
 def test_when_dealer_needs_hit_they_hit(dealer_ai: Dealer_AI) -> None:
     """
     Tests that when the need_to_hit method returns true and handle_turn is called, the Dealer_AI will hit
     Args:
         dealer_ai:
     """
-    dealer_ai.handle_turn()
     dealer_ai.hit = MagicMock()
     dealer_ai.stand = MagicMock()
+    dealer_ai.handle_turn()
     dealer_ai.hit.assert_called_with()
     dealer_ai.stand.assert_not_called()
 
 
-@patch("Dealer_ai.need_to_hit", lambda *args: False)
+@patch("milestone_2.Dealer_AI.Dealer_AI.need_to_hit", lambda *args: False)
+@patch("milestone_2.Dealer_AI.Dealer_AI.can_perform_actions", lambda *args: True)
 def test_when_dealer_does_not_need_to_hit_they_stand(dealer_ai: Dealer_AI) -> None:
     """
     Tests that when the need_to_hit method returns false and handle_turn is called, the Dealer_AI will stand
     Args:
         dealer_ai:
     """
-    dealer_ai.handle_turn()
     dealer_ai.hit = MagicMock()
     dealer_ai.stand = MagicMock()
+    dealer_ai.handle_turn()
     dealer_ai.stand.assert_called_with()
     dealer_ai.hit.assert_not_called()

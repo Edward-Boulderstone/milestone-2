@@ -59,11 +59,26 @@ def test_hand(*card_values: int) -> Hand:
 
 
 def test_ace_can_be_high_in_hand_value(blackjack_hand: Hand, ace_hand: Hand) -> None:
+    """
+    Tests if the hand can treat ace as 11 in calculating its value
+    Args:
+        blackjack_hand: A blackjack hand with an ace and a ten
+        ace_hand: A hand with an ace, and a 6
+    """
     assert blackjack_hand.value() == 21
     assert ace_hand.value() == 17
 
 
 def test_standard_hand_value(sixteen_hand: Hand, seventeen_hand: Hand) -> None:
+    """
+    Tests if the hand can calculate the value of a standard blackjack hand
+    Args:
+        sixteen_hand: hand with a six and a ten
+        seventeen_hand: hand with a seven and a ten
+
+    Returns:
+
+    """
     assert sixteen_hand.value() == 16
     assert seventeen_hand.value() == 17
 
@@ -71,6 +86,14 @@ def test_standard_hand_value(sixteen_hand: Hand, seventeen_hand: Hand) -> None:
 def test_drawing_card_updates_value(
     blackjack_hand: Hand, sixteen_hand: Hand, ten: TestCard, six: TestCard
 ) -> None:
+    """
+    Tests that a Hand can draw a card, and then update the value of the hand correctly.
+    Args:
+        blackjack_hand: A blackjack hand with an ace and a ten
+        sixteen_hand: A hand with a six and a ten
+        ten: A card of value 10
+        six: A card of value 6
+    """
     assert blackjack_hand.draw(ten).value() == 21
     assert sixteen_hand.draw(six).value() == 22
 
@@ -78,6 +101,14 @@ def test_drawing_card_updates_value(
 def test_is_bust(
     blackjack_hand: Hand, sixteen_hand: Hand, ten: TestCard, six: TestCard
 ) -> None:
+    """
+    Tests if a hand can recognise that it is bust
+    Args:
+        blackjack_hand: A blackjack hand with an ace and a ten
+        sixteen_hand: A hand with a six and a ten
+        ten: A card of value 10
+        six: A card of value 6
+    """
     assert not blackjack_hand.is_bust()
     assert not sixteen_hand.is_bust()
     assert not blackjack_hand.draw(ten).is_bust()
@@ -85,6 +116,9 @@ def test_is_bust(
 
 
 def test_comparison_of_standard_hands() -> None:
+    """
+    Tests that two standard hands can be compared using greater than and the less than operators
+    """
     hand_15 = test_hand(6, 9)
     hand_5 = test_hand(2, 3)
     hand_21 = test_hand(4, 7, 10)
@@ -95,6 +129,9 @@ def test_comparison_of_standard_hands() -> None:
 
 
 def test_comparison_of_equal_valued_hands() -> None:
+    """
+    Tests that two standard hands can be compared using equals operator and the result is based on blackjack value
+    """
     hand_15_lhs = test_hand(6, 9)
     hand_5_lhs = test_hand(2, 3)
     hand_21_lhs = test_hand(4, 7, 10)
@@ -107,14 +144,25 @@ def test_comparison_of_equal_valued_hands() -> None:
     assert hand_5_lhs == hand_5_rhs
     assert hand_21_lhs == hand_21_rhs
 
+    assert not hand_15_lhs == hand_5_rhs
+    assert not hand_5_lhs == hand_21_rhs
+    assert not hand_15_lhs == hand_21_rhs
+
 
 def test_comparison_of_blackjack_and_21(blackjack_hand: Hand) -> None:
+    """
+    Tests that a hand with 21 is less than the value of a blackjack hand
+    Args:
+        blackjack_hand: A hand with an ace and ten, an unbeatable hand
+    """
     hand_21 = test_hand(4, 7, 10)
-
     assert blackjack_hand > hand_21
 
 
 def test_bust_hand_always_less_than_other_hands() -> None:
+    """
+    Tests that a burst hand always has a lesser blackjack value than every other hand
+    """
     burst_hand = test_hand(10, 3, 9)
     hand_15 = test_hand(6, 9)
     hand_4 = test_hand(2, 2)
@@ -122,10 +170,13 @@ def test_bust_hand_always_less_than_other_hands() -> None:
 
     assert burst_hand < hand_4
     assert burst_hand < hand_15
-    assert burst_hand < hand_21
+    assert hand_21 > burst_hand
 
 
 def test_bust_hand_always_equal_to_other_bust_hands() -> None:
+    """
+    Tests that two burst hands always have the same blackjack value
+    """
     burst_hand_1 = test_hand(10, 3, 9)
     burst_hand_2 = test_hand(9, 9, 9)
     burst_hand_3 = test_hand(6, 9, 7)
@@ -136,6 +187,9 @@ def test_bust_hand_always_equal_to_other_bust_hands() -> None:
 
 
 def test_ace_in_hand_compare() -> None:
+    """
+    Tests ace high and ace low are both handled the same if their blackjack value is equal
+    """
     hand_17_with_high_ace = test_hand(11, 6)
     hand_17_with_low_ace = test_hand(11, 6, 10)
     hand_17 = test_hand(10, 7)

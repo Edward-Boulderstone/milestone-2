@@ -4,6 +4,9 @@ from milestone_2.Card import Card
 
 
 def test_card_equality() -> None:
+    """
+    Tests that two cards with the same face value are equal
+    """
     assert Card("Heart", 2) == Card("Heart", 2)
     assert Card("Spade", 1) == Card("Spade", 1)
     assert Card("Diamond", 13) == Card("Diamond", 13)
@@ -11,6 +14,9 @@ def test_card_equality() -> None:
 
 
 def test_card_out_of_bounds_fails() -> None:
+    """
+    Tests that only cards with appropriate suit names and face values can be instantiated
+    """
     with pytest.raises(AssertionError):
         Card("S", 2)
 
@@ -25,6 +31,9 @@ def test_card_out_of_bounds_fails() -> None:
 
 
 def test_card_numerical_values() -> None:
+    """
+    Tests that cards blackjack values are correct
+    """
     assert Card("Diamond", 1).get_value() == 11
     assert Card("Heart", 2).get_value() == 2
     assert Card("Heart", 3).get_value() == 3

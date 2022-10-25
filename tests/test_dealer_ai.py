@@ -104,7 +104,7 @@ def test_cannot_perform_actions_when_hand_to_beat_is_not_set(
     """
     Tests that the dealer AI cannot make actions without a player hand to try to beat
     Args:
-        dealer_ai:
+        dealer_ai:  A dealer AI
     """
     assert not dealer_ai.can_perform_actions()
     dealer_ai.set_target_hand(seventeen_hand)
@@ -117,7 +117,7 @@ def test_when_dealer_needs_hit_they_hit(dealer_ai: Dealer_AI) -> None:
     """
     Tests that when the need_to_hit method returns true and handle_turn is called, the Dealer_AI will hit
     Args:
-        dealer_ai:
+        dealer_ai:  A dealer AI
     """
     dealer_ai.hit = MagicMock()
     dealer_ai.stand = MagicMock()
@@ -132,7 +132,7 @@ def test_when_dealer_does_not_need_to_hit_they_stand(dealer_ai: Dealer_AI) -> No
     """
     Tests that when the need_to_hit method returns false and handle_turn is called, the Dealer_AI will stand
     Args:
-        dealer_ai:
+        dealer_ai:  A dealer AI
     """
     dealer_ai.hit = MagicMock()
     dealer_ai.stand = MagicMock()

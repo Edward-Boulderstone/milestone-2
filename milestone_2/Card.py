@@ -27,3 +27,6 @@ class Card:
         if not isinstance(other, Card):
             return NotImplemented
         return self.suit == other.suit and self.face_value == other.face_value
+
+    def __hash__(self):
+        return hash(self.suit) * hash(self.face_value)

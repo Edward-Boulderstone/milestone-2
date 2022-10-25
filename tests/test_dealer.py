@@ -18,4 +18,4 @@ def test_starting_hand_deal():
     """
     dealer = Dealer()
     starting_hand = dealer.deal_starting_hand()
-    assert len(starting_hand) == 2
+    assert len(starting_hand.hand) == 2

@@ -1,4 +1,4 @@
-from milestone_2 import Dealer
+from milestone_2.Dealer import Dealer
 
 
 def test_average_card_delt():

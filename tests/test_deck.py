@@ -45,3 +45,18 @@ def test_deck_throws_assertion_error_when_no_cards(deck_size: int) -> None:
         deck.draw()
     with pytest.raises(AssertionError):
         deck.draw()
+
+
+def test_deck_initializes_shuffled(deck_size: int) -> None:
+    """
+    Tests that the deck initializes with 52 cards unique cards=
+    Args:
+        deck_size: Expected deck size
+    """
+    first_deck = Deck()
+    second_deck = Deck()
+    number_of_identical_cards = 0
+    for index in range(deck_size):
+        if first_deck.draw() == second_deck.draw():
+            number_of_identical_cards += 1
+    assert not number_of_identical_cards == deck_size

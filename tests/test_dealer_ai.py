@@ -15,8 +15,8 @@ class HandStub(Hand):
 
     def output(self, hidden: bool = False) -> str:
         if hidden:
-            return self.output_
-        return f"{self.output_} but hidden"
+            return f"{self.output_} but hidden"
+        return self.output_
 
 
 @fixture

@@ -5,12 +5,18 @@ from milestone_2.Hand import Hand
 
 
 class HandStub(Hand):
-    def __init__(self, value: int) -> None:
+    def __init__(self, value: int = 0, output: str = "") -> None:
         super().__init__()
         self.hand_value = value
+        self.output_ = output
 
     def value(self) -> int:
         return self.hand_value
+
+    def output(self, hidden: bool = False) -> str:
+        if hidden:
+            return self.output_
+        return f"{self.output_} but hidden"
 
 
 @fixture
@@ -141,8 +147,13 @@ def test_when_dealer_does_not_need_to_hit_they_stand(dealer_ai: Dealer_AI) -> No
     dealer_ai.hit.assert_not_called()
 
 
-def test_dealer_hand_displays_hidden() -> None:
+def test_dealer_hand_displays_hand_hidden(dealer_ai: Dealer_AI) -> None:
     """
     Tests that the dealer's hand can be displayed with a single card, such as when the user is taking actions
+    Args:
+        dealer_ai:  A dealer AI
     """
-    assert False
+    dealer_ai.hand = HandStub(output="Output")
+    assert dealer_ai.display_hand_hidden() == "Output but hidden"
+    dealer_ai.hand = HandStub(output="Test")
+    assert dealer_ai.display_hand_hidden() == "Test but hidden"

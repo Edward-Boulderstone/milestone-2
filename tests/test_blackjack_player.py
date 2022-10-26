@@ -1,6 +1,16 @@
 from _pytest.fixtures import fixture
 
 from milestone_2.Blackjack_Player import Blackjack_Player
+from milestone_2.Hand import Hand
+
+
+class HandStub(Hand):
+    def __init__(self, output: str):
+        super().__init__()
+        self.output_ = output
+
+    def output(self, hidden: bool = False) -> str:
+        return self.output_
 
 
 @fixture
@@ -85,8 +95,14 @@ def test_player_initial_hand(player: Blackjack_Player):
     assert len(player.hand.hand) == 2
 
 
-def test_hand_is_displayed() -> None:
+def test_hand_is_displayed(player: Blackjack_Player) -> None:
+
     """
     Tests that the player's hand can be displayed
+    Args:
+        player: A freshly initialised player
     """
-    assert False
+    player.hand = HandStub("Output")
+    assert player.display_hand() == "Output"
+    player.hand = HandStub("Test")
+    assert player.display_hand() == "Test"

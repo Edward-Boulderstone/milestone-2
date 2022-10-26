@@ -84,3 +84,31 @@ class Hand:
         Returns count of aces in hand
         """
         return sum(map(lambda card: card.get_value() == 11, self.hand))
+
+    def output(self, hidden: bool = False) -> str:
+        """
+        Outputs hand as string
+        Args:
+            hidden: boolean determining if only the first card is shown
+
+        Returns:
+            A user-friendly display of a blackjack hand
+        """
+        output = "Hand = {"
+        for index in range(len(self.hand)):
+            if hidden and index != 0:
+                output += "*"
+            else:
+                output += str(self.hand[index])
+            output += ", "
+
+        output = output[:-2] + "}"
+        if hidden:
+            return output
+        output += ", Value = "
+        if self.is_blackjack():
+            output += "Blackjack"
+        else:
+            output += str(self.value())
+
+        return output

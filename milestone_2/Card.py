@@ -30,3 +30,9 @@ class Card:
 
     def __hash__(self):
         return hash(self.suit) * hash(self.face_value)
+
+    def __str__(self) -> str:
+        """
+        Returns: string display of Card
+        """
+        return f"{self.face_value} of {self.suit}s"

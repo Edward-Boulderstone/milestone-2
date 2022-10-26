@@ -31,7 +31,7 @@ def mock_user_input(mocked_input: str) -> None:
 
 
 def test_user_can_choose_to_hit_on_their_turn(
-    player,
+    player: Player,
 ) -> None:
     """
     Tests that the user inputting Hit will call the hit method
@@ -45,7 +45,7 @@ def test_user_can_choose_to_hit_on_their_turn(
 
 
 def test_user_can_choose_to_legally_stand_on_their_turn(
-    player,
+    player: Player,
 ) -> None:
     """
     Tests that the user inputting Stand will call the stand method
@@ -56,3 +56,22 @@ def test_user_can_choose_to_legally_stand_on_their_turn(
     player.stand = MagicMock()
     player.handle_turn()
     player.stand.assert_called_with()
+
+
+def test_user_can_track_funds(player: Player) -> None:
+    player.wallet.total = 200
+    assert player.get_funds() == 200
+
+    player.wallet.total = 20
+    assert player.get_funds() == 20
+
+    player.wallet.total = 5
+    assert player.get_funds() == 5
+
+
+def test_user_can_get_rewarded_with_funds() -> None:
+    assert False
+
+
+def test_user_can_bet_funds() -> None:
+    assert False

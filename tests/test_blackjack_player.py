@@ -83,3 +83,10 @@ def test_player_initial_hand(player: Blackjack_Player):
         player: A freshly initialised player
     """
     assert len(player.hand.hand) == 2
+
+
+def test_hand_is_displayed() -> None:
+    """
+    Tests that the player's hand can be displayed
+    """
+    assert False

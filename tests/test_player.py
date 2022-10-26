@@ -81,10 +81,3 @@ def test_user_can_bet_funds() -> None:
     Tests that the user can spend funds from their wallet
     """
     assert False
-
-
-def test_hand_is_displayed() -> None:
-    """
-    Tests that the user's hand can be displayed
-    """
-    assert False

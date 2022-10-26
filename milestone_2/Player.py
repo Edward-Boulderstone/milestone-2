@@ -21,3 +21,12 @@ class Player(Blackjack_Player):
                 f"Please choose one of the following game actions {self.actions}"
             )
         return user_input
+
+    def get_funds(self):
+        return self.wallet.funds
+
+    def bet_funds(self, funds_to_bet: int) -> None:
+        pass
+
+    def add_funds(self, funds_to_add: int) -> None:
+        pass

@@ -59,25 +59,46 @@ def test_user_can_choose_to_legally_stand_on_their_turn(
 
 
 def test_user_can_track_funds(player: Player) -> None:
-    player.wallet.total = 200
+    """
+    Tests that the user can track their own funds
+    Args:
+        player: A generic user
+    """
+    player.wallet.funds = 200
     assert player.get_funds() == 200
 
-    player.wallet.total = 20
+    player.wallet.funds = 20
     assert player.get_funds() == 20
 
-    player.wallet.total = 5
+    player.wallet.funds = 5
     assert player.get_funds() == 5
 
 
-def test_user_can_get_rewarded_with_funds() -> None:
+def test_user_can_get_rewarded_with_funds(player: Player) -> None:
     """
     Tests that the user can have the amount of funds in their wallet increased
+    Args:
+        player: A generic user
     """
-    assert False
+    player.wallet.funds = 200
+    player.add_funds(1500)
+    assert player.get_funds() == 1700
+
+    player.wallet.funds = 200
+    player.add_funds(100)
+    assert player.get_funds() == 300
 
 
-def test_user_can_bet_funds() -> None:
+def test_user_can_bet_funds(player: Player) -> None:
     """
     Tests that the user can spend funds from their wallet
+    Args:
+        player: A generic user
     """
-    assert False
+    player.wallet.funds = 200
+    player.bet_funds(10)
+    assert player.get_funds() == 190
+
+    player.wallet.funds = 200
+    player.bet_funds(100)
+    assert player.get_funds() == 100

@@ -29,3 +29,6 @@ class Blackjack_Player:
 
     def can_perform_actions(self) -> bool:
         return not (self.hand.is_bust() or self.is_stood)
+
+    def __str__(self):
+        raise NotImplementedError

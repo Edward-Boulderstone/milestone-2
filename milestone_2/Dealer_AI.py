@@ -38,3 +38,9 @@ class Dealer_AI(Blackjack_Player):
             self.hit()
         else:
             self.stand()
+
+    def display_hand_hidden(self) -> str:
+        """
+        Displays the dealer's hand when the user is making actions
+        """
+        return self.hand.output(True)

@@ -26,7 +26,17 @@ class Player(Blackjack_Player):
         return self.wallet.funds
 
     def bet_funds(self, funds_to_bet: int) -> None:
-        pass
+        """
+        Allows user to place bets by spending funds
+        Args:
+            funds_to_bet: funds to bet
+        """
+        self.wallet.spend(funds_to_bet)
 
     def add_funds(self, funds_to_add: int) -> None:
-        pass
+        """
+        Allows user to gain funds from winning bets
+        Args:
+            funds_to_add: Funds to be rewarded
+        """
+        self.wallet.add_funds(funds_to_add)

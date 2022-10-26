@@ -214,7 +214,7 @@ def test_hand_displays_cards(
     """
     assert blackjack_hand.output() == "Hand = {11, 10}, Value = Blackjack"
     assert ace_hand.output() == "Hand = {11, 6}, Value = 17"
-    assert sixteen_hand.output() == "Hand = {7, 10}, Value = 17"
+    assert sixteen_hand.output() == "Hand = {6, 10}, Value = 16"
     three_card_hand = test_hand(4, 7, 10)
     assert three_card_hand.output() == "Hand = {4, 7, 10}, Value = 21"
 
@@ -224,6 +224,6 @@ def test_hand_displays_first_card_when_hidden(
 ) -> None:
     assert blackjack_hand.output(True) == "Hand = {11, *}"
     assert ace_hand.output(True) == "Hand = {11, *}"
-    assert sixteen_hand.output(True) == "Hand = {7, *}"
+    assert sixteen_hand.output(True) == "Hand = {6, *}"
     three_card_hand = test_hand(4, 7, 10)
     assert three_card_hand.output(True) == "Hand = {4, *, *}"

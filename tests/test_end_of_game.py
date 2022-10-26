@@ -11,6 +11,10 @@ from milestone_2.Wallet import Wallet
 class Player_Stub(Player):
     def __init__(self):
         super().__init__()
+        self.funds_added = 0
+
+    def add_funds(self, funds_to_add: int) -> None:
+        self.funds_added += funds_to_add
 
 
 @fixture
@@ -26,10 +30,6 @@ def dealer_stub() -> Blackjack_Player:
 @fixture
 def wallet() -> Wallet:
     return Wallet()
-
-
-def test_end_game_handling() -> None:
-    assert False
 
 
 @patch(
@@ -104,7 +104,7 @@ def test_correct_identification_of_player_loss(
     handle_end_of_game(player_stub, dealer_stub, 0)
     End_Of_Game.win.assert_not_called()
     End_Of_Game.push.assert_not_called()
-    End_Of_Game.loss.assert_called_with()
+    End_Of_Game.loss.assert_called_with(0)
 
 
 @patch(
@@ -129,44 +129,70 @@ def test_will_not_end_the_game_if_either_player_can_make_actions(
     End_Of_Game.loss.assert_not_called()
 
 
-def test_on_win_displays_appropriate_message(wallet: Wallet):
+@patch("builtins.print")
+def test_on_win_displays_appropriate_message(mock_print, player_stub: Player) -> None:
     """
     Tests that when the player wins, an appropriate message is shown
     Args:
-        wallet: a wallet
+        player_stub: Stub of Player
     """
-    assert False
+    initial_bets = [0, 20, 500]
+    for initial_bet in initial_bets:
+        End_Of_Game.win(player_stub, initial_bet)
+        mock_print.assert_any_call("Congratulations! You won")
+        mock_print.assert_any_call(
+            f"Initial bet: {initial_bet}, Winnings: {initial_bet}"
+        )
+        mock_print.assert_any_call()
 
 
-def test_on_push_displays_appropriate_message(wallet: Wallet):
+@patch("builtins.print")
+def test_on_push_displays_appropriate_message(mock_print, player_stub: Player) -> None:
     """
     Tests that when the player draws with the dealer, an appropriate message is shown
     Args:
-        wallet: a wallet
+        player_stub: Stub of Player
     """
-    assert False
+    initial_bets = [0, 20, 500]
+    for initial_bet in initial_bets:
+        End_Of_Game.push(player_stub, initial_bet)
+        mock_print.assert_any_call("You drew")
+        mock_print.assert_any_call(f"Initial bet: {initial_bet}, Winnings: 0")
+        mock_print.assert_any_call()
 
 
-def test_on_loss_displays_appropriate_message():
+@patch("builtins.print")
+def test_on_loss_displays_appropriate_message(mock_print) -> None:
     """
     Tests that when the player loses, an appropriate message is shown
     """
-    assert False
+    initial_bets = [0, 20, 500]
+    for initial_bet in initial_bets:
+        End_Of_Game.loss(initial_bet)
+        mock_print.assert_any_call("Unlucky! You Lost")
+        mock_print.assert_any_call(f"Initial bet: {initial_bet}, Winnings: 0")
+        mock_print.assert_any_call()
 
 
-def test_on_win_wallet_is_updated_correctly(wallet: Wallet):
+def test_on_win_wallet_is_updated_correctly(player_stub: Player_Stub):
     """
     Tests that when the player wins, they are given the correct amount of winnings
     Args:
-        wallet: a wallet
+        player_stub: Stub of Player
     """
-    assert False
+    initial_bets = [0, 20, 500]
+    for initial_bet in initial_bets:
+        End_Of_Game.win(player_stub, initial_bet)
+        assert player_stub.funds_added == initial_bet * 2
 
 
-def test_on_push_wallet_is_updated_correctly(wallet: Wallet):
+def test_on_push_wallet_is_updated_correctly(player_stub: Player_Stub):
     """
     Tests that when the player draws with the dealers, they are refunded
     Args:
-        wallet: a wallet
+        player_stub: Stub of Player
     """
-    assert False
+    initial_bets = [0, 20, 500]
+    for initial_bet in initial_bets:
+        End_Of_Game.win(player_stub, initial_bet)
+        assert player_stub.funds_added == initial_bet

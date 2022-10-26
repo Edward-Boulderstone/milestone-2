@@ -139,3 +139,17 @@ def test_when_dealer_does_not_need_to_hit_they_stand(dealer_ai: Dealer_AI) -> No
     dealer_ai.handle_turn()
     dealer_ai.stand.assert_called_with()
     dealer_ai.hit.assert_not_called()
+
+
+def test_dealer_hand_displays_hidden() -> None:
+    """
+    Tests that the dealer's hand can be displayed with a single card, such as when the user is taking actions
+    """
+    assert False
+
+
+def test_dealer_hand_displays_normally() -> None:
+    """
+    Tests that the dealer's hand can be displayed normally
+    """
+    assert False

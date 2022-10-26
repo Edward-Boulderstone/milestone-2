@@ -70,8 +70,21 @@ def test_user_can_track_funds(player: Player) -> None:
 
 
 def test_user_can_get_rewarded_with_funds() -> None:
+    """
+    Tests that the user can have the amount of funds in their wallet increased
+    """
     assert False
 
 
 def test_user_can_bet_funds() -> None:
+    """
+    Tests that the user can spend funds from their wallet
+    """
+    assert False
+
+
+def test_hand_is_displayed() -> None:
+    """
+    Tests that the user's hand can be displayed
+    """
     assert False

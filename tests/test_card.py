@@ -46,3 +46,23 @@ def test_card_numerical_values() -> None:
     assert Card("Heart", 10).get_value() == 10
     assert Card("Heart", 11).get_value() == 10
     assert Card("Heart", 12).get_value() == 10
+    assert Card("Heart", 13).get_value() == 10
+
+
+def test_to_string() -> None:
+    """
+    Tests that a card is converted to string correctly
+    """
+    assert str(Card("Diamond", 1)) == "Ace of Diamonds"
+    assert str(Card("Heart", 2)) == "Two of Hearts"
+    assert str(Card("Club", 3)) == "Three of Clubs"
+    assert str(Card("Spade", 4)) == "Four of Spades"
+    assert str(Card("Diamond", 5)) == "Five of Diamonds"
+    assert str(Card("Heart", 6)) == "Six of Hearts"
+    assert str(Card("Club", 7)) == "Seven of Clubs"
+    assert str(Card("Spade", 8)) == "Eight of Spades"
+    assert str(Card("Diamond", 9)) == "Nine of Diamonds"
+    assert str(Card("Heart", 10)) == "Ten of Hearts"
+    assert str(Card("Club", 11)) == "Jack of Clubs"
+    assert str(Card("Spade", 12)) == "Queen of Spades"
+    assert str(Card("Diamond", 13)) == "King of Diamonds"

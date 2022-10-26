@@ -12,6 +12,9 @@ class TestCard(Card):
     def get_value(self) -> int:
         return self.value
 
+    def __str__(self):
+        return str(self.value)
+
 
 @pytest.fixture
 def ace() -> TestCard:
@@ -201,3 +204,26 @@ def test_ace_in_hand_compare() -> None:
         assert ace_hand > hand_16
         assert ace_hand == hand_17
         assert ace_hand < hand_18
+
+
+def test_hand_displays_cards(
+    blackjack_hand: Hand, ace_hand: Hand, sixteen_hand: Hand
+) -> None:
+    """
+    Tests that the hand displays its cards it correctly
+    """
+    assert blackjack_hand.output() == "Hand = {11, 10}, Value = Blackjack"
+    assert ace_hand.output() == "Hand = {11, 6}, Value = 17"
+    assert sixteen_hand.output() == "Hand = {7, 10}, Value = 17"
+    three_card_hand = test_hand(4, 7, 10)
+    assert three_card_hand.output() == "Hand = {4, 7, 10}, Value = 21"
+
+
+def test_hand_displays_first_card_when_hidden(
+    blackjack_hand: Hand, ace_hand: Hand, sixteen_hand: Hand
+) -> None:
+    assert blackjack_hand.output(True) == "Hand = {11, *}"
+    assert ace_hand.output(True) == "Hand = {11, *}"
+    assert sixteen_hand.output(True) == "Hand = {7, *}"
+    three_card_hand = test_hand(4, 7, 10)
+    assert three_card_hand.output(True) == "Hand = {4, *, *}"
